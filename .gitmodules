@@ -1,3 +1,6 @@
 [submodule "tinyusb"]
 	path = tinyusb
 	url = https://github.com/hathach/tinyusb.git
+[submodule "movement/lib/libnova"]
+	path = movement/lib/libnova
+	url = https://github.com/joeycastillo/libnova.git
