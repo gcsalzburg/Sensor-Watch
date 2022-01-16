@@ -18,6 +18,7 @@ INCLUDES += \
   -I../watch_faces/demos/ \
   -I../lib/TOTP-MCU/ \
   -I../lib/libnova/src/ \
+  -I../lib/sunriset/ \
 
 # If you add any other source files you wish to compile, add them after ../app.c
 # Note that you will need to add a backslash at the end of any line you wish to continue, i.e.
@@ -63,6 +64,7 @@ SRCS += \
   ../lib/libnova/src/utility.c \
   ../lib/libnova/src/venus.c \
   ../lib/libnova/src/vsop87.c \
+  ../lib/sunriset/sunriset.c \
   ../movement.c \
   ../watch_faces/clock/simple_clock_face.c \
   ../watch_faces/clock/world_clock_face.c \
@@ -81,6 +83,8 @@ SRCS += \
   ../watch_faces/complications/day_one_face.c \
   ../watch_faces/complications/stopwatch_face.c \
   ../watch_faces/complications/totp_face.c \
+  ../watch_faces/complications/sunrise_sunset_face.c \
+  ../watch_faces/complications/countdown_face.c \
 
 # Leave this line at the bottom of the file; it has all the targets for making your project.
 include $(TOP)/rules.mk

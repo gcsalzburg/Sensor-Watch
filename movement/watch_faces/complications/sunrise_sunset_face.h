@@ -22,22 +22,30 @@
  * SOFTWARE.
  */
 
-#ifndef VOLTAGE_FACE_H_
-#define VOLTAGE_FACE_H_
+#ifndef SUNRISE_SUNSET_FACE_H_
+#define SUNRISE_SUNSET_FACE_H_
 
 #include "movement.h"
 
-void voltage_face_setup(movement_settings_t *settings, uint8_t watch_face_index, void ** context_ptr);
-void voltage_face_activate(movement_settings_t *settings, void *context);
-bool voltage_face_loop(movement_event_t event, movement_settings_t *settings, void *context);
-void voltage_face_resign(movement_settings_t *settings, void *context);
+// The Day One face is designed to count upwards from the wearer's date of birth. It also functions as an
+// interface for setting the birth date register, which other watch faces can use for various purposes.
 
-static const watch_face_t voltage_face = {
-    voltage_face_setup,
-    voltage_face_activate,
-    voltage_face_loop,
-    voltage_face_resign,
+typedef struct {
+    uint16_t latitude;
+    uint16_t longitude;
+} sunrise_sunset_state_t;
+
+void sunrise_sunset_face_setup(movement_settings_t *settings, uint8_t watch_face_index, void ** context_ptr);
+void sunrise_sunset_face_activate(movement_settings_t *settings, void *context);
+bool sunrise_sunset_face_loop(movement_event_t event, movement_settings_t *settings, void *context);
+void sunrise_sunset_face_resign(movement_settings_t *settings, void *context);
+
+static const watch_face_t sunrise_sunset_face = {
+    sunrise_sunset_face_setup,
+    sunrise_sunset_face_activate,
+    sunrise_sunset_face_loop,
+    sunrise_sunset_face_resign,
     NULL
 };
 
-#endif // VOLTAGE_FACE_H_
+#endif // SUNRISE_SUNSET_FACE_H_

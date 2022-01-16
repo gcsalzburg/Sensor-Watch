@@ -1,7 +1,7 @@
 /*
  * MIT License
  *
- * Copyright (c) 2022 Joey Castillo
+ * Copyright (c) 2022 Wesley Ellis
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -22,22 +22,48 @@
  * SOFTWARE.
  */
 
-#ifndef VOLTAGE_FACE_H_
-#define VOLTAGE_FACE_H_
+//-----------------------------------------------------------------------------
+
+#ifndef COUNTDOWN_FACE_H_
+#define COUNTDOWN_FACE_H_
 
 #include "movement.h"
 
-void voltage_face_setup(movement_settings_t *settings, uint8_t watch_face_index, void ** context_ptr);
-void voltage_face_activate(movement_settings_t *settings, void *context);
-bool voltage_face_loop(movement_event_t event, movement_settings_t *settings, void *context);
-void voltage_face_resign(movement_settings_t *settings, void *context);
+/*
+A countdown/timer face
 
-static const watch_face_t voltage_face = {
-    voltage_face_setup,
-    voltage_face_activate,
-    voltage_face_loop,
-    voltage_face_resign,
+Max countdown is 99 minutes and 59 seconds since we have to prevent the watch
+from going to deep sleep using movement_schedule_background_task
+*/
+
+
+typedef enum {
+    cd_waiting,
+    cd_running,
+    cd_setting
+} countdown_mode_t;
+
+typedef struct {
+    uint32_t target_ts;
+    uint32_t now_ts;
+    uint8_t minutes;
+    uint8_t seconds;
+    uint8_t selection;
+    countdown_mode_t mode;
+} countdown_state_t;
+
+
+void countdown_face_setup(movement_settings_t *settings, uint8_t watch_face_index, void ** context_ptr);
+void countdown_face_activate(movement_settings_t *settings, void *context);
+bool countdown_face_loop(movement_event_t event, movement_settings_t *settings, void *context);
+void countdown_face_resign(movement_settings_t *settings, void *context);
+
+static const watch_face_t countdown_face = {
+    countdown_face_setup,
+    countdown_face_activate,
+    countdown_face_loop,
+    countdown_face_resign,
     NULL
 };
 
-#endif // VOLTAGE_FACE_H_
+#endif // COUNTDOWN_FACE_H_
