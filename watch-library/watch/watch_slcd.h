@@ -82,7 +82,7 @@ void watch_clear_display(void);
   * @note This method does not clear the display; if for example you display a two-character string at
           position 0, positions 2-9 will retain whatever state they were previously displaying.
   */
-void watch_display_string(char *string, uint8_t position);
+void watch_display_string(const char *string, uint8_t position);
 
 /** @brief Turns the colon segment on.
   */

@@ -64,6 +64,42 @@ SRCS += \
   ../lib/libnova/src/utility.c \
   ../lib/libnova/src/venus.c \
   ../lib/libnova/src/vsop87.c \
+  ../lib/libnova/src/elp/elp1.c \
+  ../lib/libnova/src/elp/elp2.c \
+  ../lib/libnova/src/elp/elp3.c \
+  ../lib/libnova/src/elp/elp4.c \
+  ../lib/libnova/src/elp/elp5.c \
+  ../lib/libnova/src/elp/elp6.c \
+  ../lib/libnova/src/elp/elp7.c \
+  ../lib/libnova/src/elp/elp8.c \
+  ../lib/libnova/src/elp/elp9.c \
+  ../lib/libnova/src/elp/elp10.c \
+  ../lib/libnova/src/elp/elp11.c \
+  ../lib/libnova/src/elp/elp12.c \
+  ../lib/libnova/src/elp/elp13.c \
+  ../lib/libnova/src/elp/elp14.c \
+  ../lib/libnova/src/elp/elp15.c \
+  ../lib/libnova/src/elp/elp16.c \
+  ../lib/libnova/src/elp/elp17.c \
+  ../lib/libnova/src/elp/elp18.c \
+  ../lib/libnova/src/elp/elp19.c \
+  ../lib/libnova/src/elp/elp20.c \
+  ../lib/libnova/src/elp/elp21.c \
+  ../lib/libnova/src/elp/elp22.c \
+  ../lib/libnova/src/elp/elp23.c \
+  ../lib/libnova/src/elp/elp24.c \
+  ../lib/libnova/src/elp/elp25.c \
+  ../lib/libnova/src/elp/elp26.c \
+  ../lib/libnova/src/elp/elp27.c \
+  ../lib/libnova/src/elp/elp28.c \
+  ../lib/libnova/src/elp/elp29.c \
+  ../lib/libnova/src/elp/elp30.c \
+  ../lib/libnova/src/elp/elp31.c \
+  ../lib/libnova/src/elp/elp32.c \
+  ../lib/libnova/src/elp/elp33.c \
+  ../lib/libnova/src/elp/elp34.c \
+  ../lib/libnova/src/elp/elp35.c \
+  ../lib/libnova/src/elp/elp36.c \
   ../lib/sunriset/sunriset.c \
   ../movement.c \
   ../watch_faces/clock/simple_clock_face.c \
@@ -85,6 +121,7 @@ SRCS += \
   ../watch_faces/complications/totp_face.c \
   ../watch_faces/complications/sunrise_sunset_face.c \
   ../watch_faces/complications/countdown_face.c \
+  ../watch_faces/complications/orrery_face.c \
 
 # Leave this line at the bottom of the file; it has all the targets for making your project.
 include $(TOP)/rules.mk

@@ -231,7 +231,7 @@ static void watch_display_character(uint8_t character, uint8_t position) {
     else if (position == 1 && (character == 'B' || character == 'D' || character == '@')) slcd_sync_seg_on(&SEGMENT_LCD_0, SLCD_SEGID(0, 12)); // add funky ninth segment
 }
 
-void watch_display_string(char *string, uint8_t position) {
+void watch_display_string(const char *string, uint8_t position) {
     size_t i = 0;
     while(string[i] != 0) {
         watch_display_character(string[i], position + i);
