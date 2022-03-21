@@ -32,18 +32,23 @@ static void read_in_uart_display_bytes(){
 	}
 }
 
-char button_pressed = 0;
+// ////////////////////////////////////
+// Button press/release handling below
 
-static void cb_light_pressed(void) {
-    button_pressed = 'L';
-}
+char button_pressed = 0;
+char button_direction = 0;
 
 static void cb_mode_pressed(void) {
     button_pressed = 'M';
+	 button_direction = watch_get_pin_level(BTN_MODE) ? 'p' : 'r';
 }
-
+static void cb_light_pressed(void) {
+    button_pressed = 'L';
+	 button_direction = watch_get_pin_level(BTN_LIGHT) ? 'p' : 'r';
+}
 static void cb_alarm_pressed(void) {
     button_pressed = 'A';
+	 button_direction = watch_get_pin_level(BTN_ALARM) ? 'p' : 'r';
 }
 
 static void process_led(char led){
@@ -72,9 +77,9 @@ void app_setup(void) {
 	watch_enable_buzzer();
 	
 	watch_enable_external_interrupts();
-	watch_register_interrupt_callback(BTN_MODE, cb_mode_pressed, INTERRUPT_TRIGGER_RISING);
-	watch_register_interrupt_callback(BTN_LIGHT, cb_light_pressed, INTERRUPT_TRIGGER_RISING);
-	watch_register_interrupt_callback(BTN_ALARM, cb_alarm_pressed, INTERRUPT_TRIGGER_RISING);
+	watch_register_interrupt_callback(BTN_MODE, cb_mode_pressed, INTERRUPT_TRIGGER_BOTH);
+	watch_register_interrupt_callback(BTN_LIGHT, cb_light_pressed, INTERRUPT_TRIGGER_BOTH);
+	watch_register_interrupt_callback(BTN_ALARM, cb_alarm_pressed, INTERRUPT_TRIGGER_BOTH);
 
 	watch_enable_uart(A2, A1, 19200);
 }
@@ -85,14 +90,24 @@ void app_wake_from_standby(void) {}
 
 bool app_loop(void) {
 
-/*	char buf[3];
+	// ///////////////////////////////////////////
+	// TX: Check for and send out msg for button presses
+
+	char send_buffer[5];
+	memset(send_buffer, 0, sizeof send_buffer);
 
 	if (button_pressed) {
-		sprintf(buf, "%c", button_pressed);
-		printf("%s\n", buf);
-		watch_uart_puts(buf);
+		send_buffer[0] = 'b';
+		send_buffer[1] = button_pressed;
+		send_buffer[2] = button_direction;
+		send_buffer[3] = '.';
+		watch_uart_puts(send_buffer);
 		button_pressed = 0;
-	}*/
+		button_direction = 0;
+	}
+
+	// ///////////////////////////////////////////
+	// RX: Handle incoming messages
 
 	char char_received = watch_uart_getc();
 	if (char_received) {
